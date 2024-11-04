@@ -8,6 +8,8 @@ import TrendingPage from '../pages/Trending/TrendingPage';
 import SearchPage from '../pages/Search/SearchPage';
 import WishlistPage from '../pages/Wishlist/WishlistPage';
 import { isAuthenticated } from '../utils/auth';
+import Login from '../components/Login/Login';
+import SignUp from '../components/SignUp/SignUp';
 
 const ProtectedRoute: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   if (!isAuthenticated()) {
@@ -20,47 +22,9 @@ const AppRouter: React.FC = () => (
   <Router>
     <AnimatePresence>
       <Routes>
-        <Route
-          path="/auth"
-          element={
-            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
-              <AuthPage />
-            </motion.div>
-          }
-        />
-        {/* <Route
-          path="/"
-          element={
-            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
-              <HomePage />
-            </motion.div>
-          }
-        /> */}
-        <Route path="/" element={<ProtectedRoute><HomePage /></ProtectedRoute>} />
-        <Route
-          path="/trending"
-          element={
-            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
-              <TrendingPage />
-            </motion.div>
-          }
-        />
-        <Route
-          path="/search"
-          element={
-            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
-              <SearchPage />
-            </motion.div>
-          }
-        />
-        <Route
-          path="/wishlist"
-          element={
-            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
-              <WishlistPage />
-            </motion.div>
-          }
-        />
+        <Route path="/signin" element={<Login />} />
+        <Route path="/" element={<ProtectedRoute><Login /></ProtectedRoute>} />
+        <Route path="/signup" element={<SignUp />} />
       </Routes>
     </AnimatePresence>
   </Router>

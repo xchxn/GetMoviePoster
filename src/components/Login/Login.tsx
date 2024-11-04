@@ -23,8 +23,9 @@ const Login: React.FC = () => {
     }
 
     try {
-      const response = await axios.post('https://api.themoviedb.org/3/authentication/token/new', {
-        api_key: 'YOUR_TMDB_API_KEY',
+      const response = await axios.post(`${process.env.MOVIE_APP_API_URL}/authentication/token/new`, {
+        // api_key: 'YOUR_TMDB_API_KEY',
+        api_key: process.env.MOVIE_APP_API_KEY
       });
       
       const token = response.data.request_token;
