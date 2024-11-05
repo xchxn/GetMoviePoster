@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { toast } from 'react-toastify';
+import { tryLogin } from '../../utils/auth';
 
 const Login: React.FC = () => {
   const [email, setEmail] = useState('');
@@ -24,15 +25,11 @@ const Login: React.FC = () => {
 
     try {
       const response = await axios.post(`${process.env.MOVIE_APP_API_URL}/authentication/token/new`, {
-        // api_key: 'YOUR_TMDB_API_KEY',
         api_key: process.env.MOVIE_APP_API_KEY
       });
-      
       const token = response.data.request_token;
-
       if (token) {
-        localStorage.setItem('token', token);
-        if (rememberMe) localStorage.setItem('email', email);
+        tryLogin(email, password, token, rememberMe);
 
         toast.success('로그인 성공!');
         navigate('/');

@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import { tryRegister } from '../../utils/auth';
 
 const SignUp: React.FC = () => {
   const [email, setEmail] = useState('');
@@ -35,9 +36,8 @@ const SignUp: React.FC = () => {
     }
 
     try {
-      // 회원가입 로직 구현 (백엔드 API 호출 예시)
-      // 실제 API가 있다면 아래를 수정하여 연결하세요.
-      // const response = await axios.post('YOUR_SIGNUP_API_URL', { email, password });
+      // utils의 auth.ts 호출
+      tryRegister(email, password);
 
       // 회원가입 성공 시 처리
       toast.success('회원가입 성공!');
