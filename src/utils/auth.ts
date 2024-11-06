@@ -9,7 +9,7 @@ export const saveLoginInfo = (email: string, token: string, rememberMe: boolean)
 };
 
 export const tryLogin = ( 
-  email: string, password:string, saveToken: any, rememberMe: boolean
+  email: string, password:string, token: any, rememberMe: boolean
 ) => {
   // users 무조건 수정
   const users = JSON.parse(localStorage.getItem("users") || "[]");
@@ -17,7 +17,7 @@ export const tryLogin = (
   const user = users.find((user: { id: string; password: string; }) => user.id === email && user.password === password);
   if (user) {
     localStorage.setItem('TMDb-Key', user.password); // API 키 저장
-    localStorage.setItem('token', saveToken); // 토큰 저장 이양
+    localStorage.setItem('token', token); // 토큰 저장 이양
     if(rememberMe){
       localStorage.setItem('email', email);
     }

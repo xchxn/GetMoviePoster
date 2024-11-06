@@ -24,9 +24,15 @@ const Login: React.FC = () => {
     }
 
     try {
-      const response = await axios.post(`${process.env.MOVIE_APP_API_URL}/authentication/token/new`, {
-        api_key: process.env.MOVIE_APP_API_KEY
+      const response = await axios.get(`${process.env.REACT_APP_MOVIE_API_URL}/authentication/token/new`,{
+      headers: {
+        Authorization: `Bearer ${process.env.REACT_APP_MOVIE_ACCESS_TOKEN}`,
+        accept: 'application/json'
+        }
       });
+
+      console.log(response);
+      
       const token = response.data.request_token;
       if (token) {
         tryLogin(email, password, token, rememberMe);

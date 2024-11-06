@@ -10,6 +10,8 @@ import WishlistPage from '../pages/Wishlist/WishlistPage';
 import { isAuthenticated } from '../utils/auth';
 import Login from '../components/Login/Login';
 import SignUp from '../components/SignUp/SignUp';
+import Main from '../components/Main/Main';
+import Header from '../components/Header/Header';
 
 const ProtectedRoute: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   if (!isAuthenticated()) {
@@ -20,10 +22,11 @@ const ProtectedRoute: React.FC<{ children: React.ReactNode }> = ({ children }) =
 
 const AppRouter: React.FC = () => (
   <Router>
+    <Header />
     <AnimatePresence>
       <Routes>
         <Route path="/signin" element={<Login />} />
-        <Route path="/" element={<ProtectedRoute><Login /></ProtectedRoute>} />
+        <Route path="/" element={<ProtectedRoute><Main /></ProtectedRoute>} />
         <Route path="/signup" element={<SignUp />} />
       </Routes>
     </AnimatePresence>
