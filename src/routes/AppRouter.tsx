@@ -12,6 +12,7 @@ import Login from '../components/Login/Login';
 import SignUp from '../components/SignUp/SignUp';
 import Main from '../components/Main/Main';
 import Header from '../components/Header/Header';
+import Wishlist from '../components/Wishlist/Wishlist';
 
 const ProtectedRoute: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   if (!isAuthenticated()) {
@@ -28,6 +29,7 @@ const AppRouter: React.FC = () => (
         <Route path="/signin" element={<Login />} />
         <Route path="/" element={<ProtectedRoute><Main /></ProtectedRoute>} />
         <Route path="/signup" element={<SignUp />} />
+        <Route path="/wishlist" element={<Wishlist/>} />
       </Routes>
     </AnimatePresence>
   </Router>
