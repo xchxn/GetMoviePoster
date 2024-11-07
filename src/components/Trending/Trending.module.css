@@ -1,0 +1,66 @@
+/* src/styles/Trending.module.css */
+
+.container {
+  padding: 20px;
+}
+
+.viewToggle {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.movieGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+.movieCard {
+  position: relative;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.movieCard img {
+  width: 100%;
+  height: auto;
+}
+
+.movieInfo {
+  padding: 10px;
+  font-size: 14px;
+  color: #333;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.loading {
+  text-align: center;
+  margin: 20px 0;
+}
+
+.topButton {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.topButton:hover {
+  background-color: #0056b3;
+}

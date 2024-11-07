@@ -18,6 +18,7 @@ export const tryLogin = (
   if (user) {
     localStorage.setItem('TMDb-Key', user.password); // API 키 저장
     localStorage.setItem('token', token); // 토큰 저장 이양
+
     if(rememberMe){
       localStorage.setItem('email', email);
     }
@@ -38,5 +39,14 @@ export const tryRegister = (
     return { success: true, message: "User registered successfully" };
   } else {
     return { success: false, message: "User already exists" };
+  }
+}
+
+export const logout = () => {
+  if (isAuthenticated()) {
+    localStorage.removeItem('token');
+    return { success: true, message: "Logout successfully" };
+  } else {
+    return { success: false, message: "User not logged in" };
   }
 }
