@@ -4,6 +4,7 @@ import axios from 'axios';
 import MovieCard from '../Card/MovieCard';
 import Pagination from '../Pagination/Pagination';
 import styles from './Trending.module.css';
+
 interface Movie {
   id: number;
   title: string;
