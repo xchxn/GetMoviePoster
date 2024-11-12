@@ -43,6 +43,8 @@ export const tryRegister = (
 
 export const logout = () => {
   if (isAuthenticated()) {
+    localStorage.removeItem('email');
+    localStorage.removeItem('TMDb-Key'); // API 키 저장
     localStorage.removeItem('token');
     return { success: true, message: "Logout successfully" };
   } else {

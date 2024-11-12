@@ -10,8 +10,8 @@ interface Movie {
   vote_average: number;
   release_date: string;
   genre_ids: number[];
+  adult: boolean;
 }
-
 
 const Search = () => {
   const [popular, setPopular] = useState<Movie[]>([]);
@@ -19,6 +19,12 @@ const Search = () => {
 
   // 필터 목록
   // adult, genre, release_date, vote_average
+  const [adult, setAdult] = useState<boolean>(false);
+  const [genre, setGenre] = useState<number | null>(null);
+  const [releaseDate, setReleaseDate] = useState<string>("");
+  const [voteAverage, setVoteAverage] = useState<number | null>(null);
+
+  // 초기화 옵션
 
   const [error, setError] = useState<string | null>(null);
 
@@ -47,7 +53,7 @@ const Search = () => {
     fetchMovies("/movie/popular", setPopular);
   }, []);
 
-// wishlist를 위한 로컬 스토리지 관리
+  // wishlist를 위한 로컬 스토리지 관리
   // localStorage에서 저장된 영화 목록을 불러옴
   const loadSavedMovies = () => {
     const wishlists = localStorage.getItem("wishlist");
@@ -61,7 +67,7 @@ const Search = () => {
     const updatedWishlist = [...wishlist, movie];
     setWishlist(updatedWishlist);
     localStorage.setItem("wishlist", JSON.stringify(updatedWishlist));
-    console.log("save", localStorage.getItem('wishlist'));
+    console.log("save", localStorage.getItem("wishlist"));
   };
 
   // 저장된 영화 목록을 삭제하는 함수
@@ -76,19 +82,93 @@ const Search = () => {
     return wishlist.some((movie) => movie.id === movieId);
   };
 
-  
+  // 필터링 적용 함수
+  const filterMovies = (movies: Movie[]) => {
+    return movies.filter((movie) => {
+      const meetsAdult = adult || !movie.adult;
+      const meetsGenre = genre ? movie.genre_ids.includes(genre) : true;
+      const meetsReleaseDate = releaseDate
+        ? movie.release_date >= releaseDate
+        : true;
+      const meetsVoteAverage = voteAverage
+        ? movie.vote_average >= voteAverage
+        : true;
+      return meetsAdult && meetsGenre && meetsReleaseDate && meetsVoteAverage;
+    });
+  };
+
+  const resetFilters = () => {
+    setAdult(false);
+    setGenre(null);
+    setReleaseDate("");
+    setVoteAverage(null);
+  };
+
+
   return (
     <div className={styles.mainContainer}>
       <div className={styles.filterContainer}>
-
+        <h3>필터 옵션</h3>
+        <label>
+          <input
+            type="checkbox"
+            checked={adult}
+            onChange={() => setAdult(!adult)}
+          />
+          성인 포함
+        </label>
+        <label>
+          장르:
+          <select
+            value={genre ?? ""}
+            onChange={(e) =>
+              setGenre(e.target.value ? Number(e.target.value) : null)
+            }
+          >
+            <option value="">전체</option>
+            <option value="28">액션</option>
+            <option value="35">코미디</option>
+            <option value="18">드라마</option>
+            {/* 추가 장르 옵션 */}
+          </select>
+        </label>
+        <label>
+          개봉일:
+          <input
+            type="date"
+            value={releaseDate}
+            onChange={(e) => setReleaseDate(e.target.value)}
+          />
+        </label>
+        <label>
+          평점 이상:
+          <input
+            type="number"
+            value={voteAverage ?? ""}
+            min="0"
+            max="10"
+            step="0.1"
+            onChange={(e) =>
+              setVoteAverage(e.target.value ? Number(e.target.value) : null)
+            }
+          />
+        </label>
+        <button className={styles.resetButton} onClick={resetFilters}>
+          필터 초기화
+        </button>
       </div>
-      <h2 className={styles.sectionTitle}>인기 작품</h2>
-      <MovieList movies={popular} onSaveMovie={handleSaveMovie} onRemoveMovie={handleRemoveMovie} isInWishlist={isInWishlist}/>
+      <h2 className={styles.sectionTitle}>찾기</h2>
+      <MovieList
+        movies={popular}
+        onSaveMovie={handleSaveMovie}
+        onRemoveMovie={handleRemoveMovie}
+        isInWishlist={isInWishlist}
+      />
     </div>
   );
-}
+};
 
-const MovieList: React.FC<{ 
+const MovieList: React.FC<{
   movies: Movie[];
   onSaveMovie?: (movie: Movie) => void;
   onRemoveMovie?: (movieId: number) => void;
@@ -115,7 +195,7 @@ const MovieList: React.FC<{
               💔
             </button>
           ) : (
-            <button 
+            <button
               className={styles.saveButton}
               onClick={() => onSaveMovie?.(movie)}
             >
