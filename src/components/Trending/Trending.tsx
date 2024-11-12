@@ -60,12 +60,14 @@ const Trending: React.FC = () => {
   };
 
   useEffect(() => {
+    loadSavedMovies();
     if (view === 'infinite') {
       window.addEventListener('scroll', handleScroll);
     }
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
+    
   }, [view, loading]);
 
   const scrollToTop = () => {

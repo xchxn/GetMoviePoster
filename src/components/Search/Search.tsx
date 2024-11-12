@@ -51,6 +51,7 @@ const Search = () => {
 
   useEffect(() => {
     fetchMovies("/movie/popular", setPopular);
+    loadSavedMovies();
   }, []);
 
   // wishlist를 위한 로컬 스토리지 관리

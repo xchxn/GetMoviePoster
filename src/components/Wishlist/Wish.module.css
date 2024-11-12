@@ -1,0 +1,52 @@
+/* src/components/Main.module.css */
+.mainContainer {
+  padding: 20px;
+}
+
+.sectionTitle {
+  font-size: 24px;
+  font-weight: bold;
+  margin: 20px 0 10px;
+}
+
+.movieList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.movieItem {
+  width: 200px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s;
+}
+
+.movieItem:hover {
+  transform: scale(1.05);
+}
+
+.moviePoster {
+  width: 100%;
+  height: auto;
+}
+
+.movieTitle {
+  font-size: 18px;
+  font-weight: bold;
+  margin: 10px;
+}
+
+.movieDetails {
+  padding: 10px;
+  font-size: 14px;
+  color: #666;
+}
+
+.movieOverview {
+  font-size: 13px;
+  color: #333;
+  margin-top: 8px;
+}

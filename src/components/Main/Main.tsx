@@ -102,6 +102,7 @@ const Main = () => {
     fetchMovies("/movie/popular", setPopular);
     fetchMovies("/movie/top_rated", setTopRated);
     fetchMovies("/movie/upcoming", setUpcoming);
+    loadSavedMovies();
   }, []);
 
   if (error) {
