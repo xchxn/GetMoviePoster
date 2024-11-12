@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from "./Wish.module.css";
 
 interface Movie {
@@ -25,6 +25,11 @@ const Wishlist = () => {
     }
   };
 
+  // 컴포넌트가 마운트될 때 영화 목록 로드
+  useEffect(() => {
+    loadSavedMovies();
+  }, []);
+
   // 영화를 localStorage에 저장하는 함수
   const handleSaveMovie = (movie: Movie) => {
     const updatedWishlist = [...wishlist, movie];
@@ -40,6 +45,12 @@ const Wishlist = () => {
     localStorage.setItem("wishlist", JSON.stringify(updatedWishlist));
   };
 
+  // 영화가 wishlist에 포함되어 있는지 확인하는 함수
+  const isInWishlist = (movieId: number): boolean => {
+    return wishlist.some((movie) => movie.id === movieId);
+  };
+
+
   if (error) {
     return <div>{error}</div>;
   }
@@ -48,7 +59,7 @@ const Wishlist = () => {
     <div>
       <div className={styles.mainContainer}>
       <h2 className={styles.sectionTitle}>현재 상영작</h2>
-      <MovieList movies={wishlist}  onSaveMovie={handleSaveMovie}/>
+      <MovieList movies={wishlist} onSaveMovie={handleSaveMovie} onRemoveMovie={handleRemoveMovie}  isInWishlist={isInWishlist}/>
     </div>
     </div>
   );
@@ -58,8 +69,8 @@ const MovieList: React.FC<{
   movies: Movie[];
   onSaveMovie?: (movie: Movie) => void;
   onRemoveMovie?: (movieId: number) => void;
-  wishlist?: boolean;
-}> = ({ movies, onSaveMovie, onRemoveMovie, wishlist = false }) => (
+  isInWishlist: (movieId: number) => boolean;
+}> = ({ movies, onSaveMovie, onRemoveMovie, isInWishlist }) => (
   <div className={styles.movieList}>
     {movies.map((movie) => (
       <div key={movie.id} className={styles.movieItem}>
@@ -73,7 +84,7 @@ const MovieList: React.FC<{
           <p>평점: {movie.vote_average}</p>
           <p>개봉일: {movie.release_date}</p>
           <p>{movie.overview}</p>
-          {wishlist ? (
+          {isInWishlist(movie.id) ? (
             <button
               className={styles.removeButton}
               onClick={() => onRemoveMovie?.(movie.id)}

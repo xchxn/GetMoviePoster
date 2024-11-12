@@ -14,6 +14,7 @@ import Main from '../components/Main/Main';
 import Header from '../components/Header/Header';
 import Wishlist from '../components/Wishlist/Wishlist';
 import Trending from '../components/Trending/Trending';
+import Search from '../components/Search/Search';
 
 const ProtectedRoute: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   if (!isAuthenticated()) {
@@ -30,9 +31,9 @@ const AppRouter: React.FC = () => (
         <Route path="/signin" element={<Login />} />
         <Route path="/" element={<ProtectedRoute><Main /></ProtectedRoute>} />
         <Route path="/signup" element={<SignUp />} />
+        <Route path="/search" element={<Search/>} />
         <Route path="/wishlist" element={<Wishlist/>} />
         <Route path="/trending" element={<Trending/>} />
-
       </Routes>
     </AnimatePresence>
   </Router>

@@ -24,6 +24,8 @@ const Trending: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const [view, setView] = useState<'table' | 'infinite'>('table');
 
+  const [wishlist, setWishlist] = useState<Movie[]>([]); // wishList 관리
+
   useEffect(() => {
     loadMovies(page);
   }, [page]);
@@ -33,7 +35,8 @@ const Trending: React.FC = () => {
     try {
       const response = await axios.get(`${BASE_URL}/movie/popular`, {
         headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
+          // Authorization: `Bearer ${localStorage.getItem("token")}`,
+          Authorization: `Bearer ${process.env.REACT_APP_MOVIE_ACCESS_TOKEN}`,
           accept: "application/json",
         },
       });
@@ -69,6 +72,35 @@ const Trending: React.FC = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
+  // wishlist를 위한 로컬 스토리지 관리
+  // localStorage에서 저장된 영화 목록을 불러옴
+  const loadSavedMovies = () => {
+    const wishlists = localStorage.getItem("wishlist");
+    if (wishlists) {
+      setWishlist(JSON.parse(wishlists));
+    }
+  };
+
+  // 영화를 localStorage에 저장하는 함수
+  const handleSaveMovie = (movie: Movie) => {
+    const updatedWishlist = [...wishlist, movie];
+    setWishlist(updatedWishlist);
+    localStorage.setItem("wishlist", JSON.stringify(updatedWishlist));
+    console.log("save", localStorage.getItem('wishlist'));
+  };
+
+  // 저장된 영화 목록을 삭제하는 함수
+  const handleRemoveMovie = (movieId: number) => {
+    const updatedWishlist = wishlist.filter((movie) => movie.id !== movieId);
+    setWishlist(updatedWishlist);
+    localStorage.setItem("wishlist", JSON.stringify(updatedWishlist));
+  }
+
+  // 영화가 wishlist에 포함되어 있는지 확인하는 함수
+  const isInWishlist = (movieId: number): boolean => {
+    return wishlist.some((movie) => movie.id === movieId);
+  };
+
   return (
     <div className={styles.container}>
       <div className={styles.viewToggle}>
@@ -80,7 +112,7 @@ const Trending: React.FC = () => {
         <>
           <div className={styles.movieGrid}>
             {movies.map((movie) => (
-              <MovieCard key={movie.id} movie={movie} />
+              <MovieCard key={movie.id} movie={movie} onSaveMovie={handleSaveMovie} onRemoveMovie={handleRemoveMovie} isInWishlist={isInWishlist}/>
             ))}
           </div>
           <Pagination currentPage={page} onPageChange={setPage} />
@@ -89,7 +121,7 @@ const Trending: React.FC = () => {
         <div className={styles.infiniteScrollContainer}>
           <div className={styles.movieGrid}>
             {movies.map((movie) => (
-              <MovieCard key={movie.id} movie={movie} />
+              <MovieCard key={movie.id} movie={movie} onSaveMovie={handleSaveMovie} onRemoveMovie={handleRemoveMovie} isInWishlist={isInWishlist}/>
             ))}
           </div>
           {loading && <div className={styles.loading}>Loading...</div>}

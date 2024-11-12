@@ -85,7 +85,8 @@ const Main = () => {
         `${process.env.REACT_APP_MOVIE_API_URL}${endpoint}`,
         {
           headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
+            // Authorization: `Bearer ${localStorage.getItem("token")}`,
+            Authorization: `Bearer ${process.env.REACT_APP_MOVIE_ACCESS_TOKEN}`,
             accept: "application/json",
           },
         }
@@ -131,19 +132,24 @@ const Main = () => {
     localStorage.setItem("wishlist", JSON.stringify(updatedWishlist));
   };
 
+  // 영화가 wishlist에 포함되어 있는지 확인하는 함수
+  const isInWishlist = (movieId: number): boolean => {
+    return wishlist.some((movie) => movie.id === movieId);
+  };
+
   return (
     <div className={styles.mainContainer}>
       <h2 className={styles.sectionTitle}>현재 상영작</h2>
-      <MovieList movies={nowPlaying} onSaveMovie={handleSaveMovie}/>
+      <MovieList movies={nowPlaying} onSaveMovie={handleSaveMovie} onRemoveMovie={handleRemoveMovie} isInWishlist={isInWishlist}/>
 
       <h2 className={styles.sectionTitle}>인기 작품</h2>
-      <MovieList movies={popular} onSaveMovie={handleSaveMovie}/>
+      <MovieList movies={popular} onSaveMovie={handleSaveMovie} onRemoveMovie={handleRemoveMovie} isInWishlist={isInWishlist}/>
 
       <h2 className={styles.sectionTitle}>평점 높은 영화</h2>
-      <MovieList movies={topRated} onSaveMovie={handleSaveMovie}/>
+      <MovieList movies={topRated} onSaveMovie={handleSaveMovie} onRemoveMovie={handleRemoveMovie} isInWishlist={isInWishlist}/>
 
       <h2 className={styles.sectionTitle}>개봉 예정작</h2>
-      <MovieList movies={upcoming} onSaveMovie={handleSaveMovie}/>
+      <MovieList movies={upcoming} onSaveMovie={handleSaveMovie} onRemoveMovie={handleRemoveMovie} isInWishlist={isInWishlist}/>
     </div>
   );
 };
@@ -152,8 +158,8 @@ const MovieList: React.FC<{
   movies: Movie[];
   onSaveMovie?: (movie: Movie) => void;
   onRemoveMovie?: (movieId: number) => void;
-  wishlist?: boolean;
-}> = ({ movies, onSaveMovie, onRemoveMovie, wishlist = false }) => (
+  isInWishlist: (movieId: number) => boolean;
+}> = ({ movies, onSaveMovie, onRemoveMovie, isInWishlist }) => (
   <div className={styles.movieList}>
     {movies.map((movie) => (
       <div key={movie.id} className={styles.movieItem}>
@@ -167,7 +173,7 @@ const MovieList: React.FC<{
           <p>평점: {movie.vote_average}</p>
           <p>개봉일: {movie.release_date}</p>
           <p>{movie.overview}</p>
-          {wishlist ? (
+          {isInWishlist(movie.id) ? (
             <button
               className={styles.removeButton}
               onClick={() => onRemoveMovie?.(movie.id)}
