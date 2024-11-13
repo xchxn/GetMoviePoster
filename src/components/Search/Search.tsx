@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import axios from "axios";
 import styles from "./Search.module.css";
 
@@ -43,6 +43,7 @@ const Search = () => {
           },
         }
       );
+      console.log(response.data);
       setState(response.data.results);
     } catch (err) {
       setError("영화 정보를 가져오는 중 오류가 발생했습니다.");
@@ -105,6 +106,11 @@ const Search = () => {
     setVoteAverage(null);
   };
 
+  // 필터링된 영화 목록을 useMemo로 캐싱하여 성능 최적화
+  const filteredMovies = useMemo(
+    () => filterMovies(popular),
+    [popular, adult, genre, releaseDate, voteAverage]
+  );
 
   return (
     <div className={styles.mainContainer}>
@@ -119,8 +125,8 @@ const Search = () => {
           성인 포함
         </label>
         <label className={styles.filterTitle}>
-          장르: 
-          <select 
+          장르:
+          <select
             value={genre ?? ""}
             onChange={(e) =>
               setGenre(e.target.value ? Number(e.target.value) : null)
@@ -167,6 +173,7 @@ const Search = () => {
         onSaveMovie={handleSaveMovie}
         onRemoveMovie={handleRemoveMovie}
         isInWishlist={isInWishlist}
+        filters={{ adult, genre, releaseDate, voteAverage }}
       />
     </div>
   );
@@ -177,39 +184,62 @@ const MovieList: React.FC<{
   onSaveMovie?: (movie: Movie) => void;
   onRemoveMovie?: (movieId: number) => void;
   isInWishlist: (movieId: number) => boolean;
-}> = ({ movies, onSaveMovie, onRemoveMovie, isInWishlist }) => (
-  <div className={styles.movieList}>
-    {movies.map((movie) => (
-      <div key={movie.id} className={styles.movieItem}>
-        <img
-          src={`${process.env.REACT_APP_MOVIE_IMAGE_BASE_URL}/w200${movie.poster_path}`}
-          alt={movie.title}
-          className={styles.moviePoster}
-        />
-        <h3 className={styles.movieTitle}>{movie.title}</h3>
-        <div className={styles.movieDetails}>
-          <p>평점: {movie.vote_average}</p>
-          <p>개봉일: {movie.release_date}</p>
-          <p>{movie.overview}</p>
-          {isInWishlist(movie.id) ? (
-            <button
-              className={styles.removeButton}
-              onClick={() => onRemoveMovie?.(movie.id)}
-            >
-              💔
-            </button>
-          ) : (
-            <button
-              className={styles.saveButton}
-              onClick={() => onSaveMovie?.(movie)}
-            >
-              ❤
-            </button>
-          )}
+  filters: {
+    adult: boolean;
+    genre: number | null;
+    releaseDate: string;
+    voteAverage: number | null;
+  };
+}> = ({ movies, onSaveMovie, onRemoveMovie, isInWishlist, filters }) => {
+  // 필터 조건을 적용하여 영화 목록 필터링
+  const filteredMovies = movies.filter((movie) => {
+    const meetsAdult = filters.adult || !movie.adult;
+    const meetsGenre = filters.genre
+      ? movie.genre_ids.includes(filters.genre)
+      : true;
+    const meetsReleaseDate = filters.releaseDate
+      ? movie.release_date >= filters.releaseDate
+      : true;
+    const meetsVoteAverage = filters.voteAverage
+      ? movie.vote_average >= filters.voteAverage
+      : true;
+    return meetsAdult && meetsGenre && meetsReleaseDate && meetsVoteAverage;
+  });
+
+  return (
+    <div className={styles.movieList}>
+      {filteredMovies.map((movie) => (
+        <div key={movie.id} className={styles.movieItem}>
+          <img
+            src={`${process.env.REACT_APP_MOVIE_IMAGE_BASE_URL}/w200${movie.poster_path}`}
+            alt={movie.title}
+            className={styles.moviePoster}
+          />
+          <h3 className={styles.movieTitle}>{movie.title}</h3>
+          <div className={styles.movieDetails}>
+            <p>평점: {movie.vote_average}</p>
+            <p>개봉일: {movie.release_date}</p>
+            <p>{movie.overview}</p>
+            {isInWishlist(movie.id) ? (
+              <button
+                className={styles.removeButton}
+                onClick={() => onRemoveMovie?.(movie.id)}
+              >
+                💔
+              </button>
+            ) : (
+              <button
+                className={styles.saveButton}
+                onClick={() => onSaveMovie?.(movie)}
+              >
+                ❤
+              </button>
+            )}
+          </div>
         </div>
-      </div>
-    ))}
-  </div>
-);
+      ))}
+    </div>
+  );
+};
 
 export default Search;
