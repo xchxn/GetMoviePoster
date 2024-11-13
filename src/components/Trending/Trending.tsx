@@ -26,6 +26,8 @@ const Trending: React.FC = () => {
 
   const [wishlist, setWishlist] = useState<Movie[]>([]); // wishList 관리
 
+  const [moviesPerPage] = useState(5);  // 페이지당 영화 개수
+
   useEffect(() => {
     loadMovies(page);
   }, [page]);
@@ -46,6 +48,11 @@ const Trending: React.FC = () => {
     }
     setLoading(false);
   };
+  
+  // 현재 페이지에 맞는 영화 목록을 계산
+  const indexOfLastMovie = page * moviesPerPage;
+  const indexOfFirstMovie = indexOfLastMovie - moviesPerPage;
+  const currentMovies = movies.slice(indexOfFirstMovie, indexOfLastMovie);
 
   const handleScroll = () => {
     if (view !== 'infinite' || loading) return;
@@ -117,7 +124,11 @@ const Trending: React.FC = () => {
               <MovieCard key={movie.id} movie={movie} onSaveMovie={handleSaveMovie} onRemoveMovie={handleRemoveMovie} isInWishlist={isInWishlist}/>
             ))}
           </div>
-          <Pagination currentPage={page} onPageChange={setPage} />
+          <Pagination 
+            currentPage={page} 
+            onPageChange={setPage}
+            totalPages={Math.ceil(movies.length / moviesPerPage)}
+            />
         </>
       ) : (
         <div className={styles.infiniteScrollContainer}>

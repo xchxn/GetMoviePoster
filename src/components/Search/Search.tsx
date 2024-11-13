@@ -109,8 +109,8 @@ const Search = () => {
   return (
     <div className={styles.mainContainer}>
       <div className={styles.filterContainer}>
-        <h3>필터 옵션</h3>
-        <label>
+        <h3 className={styles.filterTitle}>필터 옵션</h3>
+        <label className={styles.filterTitle}>
           <input
             type="checkbox"
             checked={adult}
@@ -118,13 +118,14 @@ const Search = () => {
           />
           성인 포함
         </label>
-        <label>
-          장르:
-          <select
+        <label className={styles.filterTitle}>
+          장르: 
+          <select 
             value={genre ?? ""}
             onChange={(e) =>
               setGenre(e.target.value ? Number(e.target.value) : null)
             }
+            className={styles.filterDropdown}
           >
             <option value="">전체</option>
             <option value="28">액션</option>
@@ -133,15 +134,16 @@ const Search = () => {
             {/* 추가 장르 옵션 */}
           </select>
         </label>
-        <label>
+        <label className={styles.filterTitle}>
           개봉일:
           <input
             type="date"
             value={releaseDate}
             onChange={(e) => setReleaseDate(e.target.value)}
+            className={styles.filterDropdown}
           />
         </label>
-        <label>
+        <label className={styles.filterTitle}>
           평점 이상:
           <input
             type="number"
@@ -152,9 +154,10 @@ const Search = () => {
             onChange={(e) =>
               setVoteAverage(e.target.value ? Number(e.target.value) : null)
             }
+            className={styles.filterDropdown}
           />
         </label>
-        <button className={styles.resetButton} onClick={resetFilters}>
+        <button className={styles.filterButton} onClick={resetFilters}>
           필터 초기화
         </button>
       </div>

@@ -1,0 +1,71 @@
+/* Navbar 전체 스타일 */
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #333; /* 네비게이션 배경색 */
+  color: #fff;
+  padding: 10px 20px;
+  margin: 6px 9px;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* 로고 및 링크 스타일 */
+.navLinks {
+  display: flex;
+  gap: 20px;
+}
+
+.navLink {
+  color: #ddd;
+  text-decoration: none;
+  font-size: 16px;
+  transition: color 0.3s ease;
+}
+
+.navLink:hover {
+  color: #fff; /* 호버 시 텍스트 색상 */
+}
+
+.activeLink {
+  color: #4CAF50; /* 활성화된 링크 색상 */
+  font-weight: bold;
+}
+
+/* 로그아웃 버튼 스타일 */
+.logoutButton {
+  padding: 8px 16px;
+  color: #fff;
+  background-color: #e74c3c;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.logoutButton:hover {
+  background-color: #c0392b; /* 호버 시 색상 변경 */
+}
+
+/* 모바일 반응형 */
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 15px;
+  }
+
+  .navLinks {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .logoutButton {
+    align-self: flex-end;
+  }
+}
