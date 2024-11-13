@@ -22,13 +22,18 @@
 
 // export default Header;
 // src/components/Navbar.tsx
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { logout } from "../../utils/auth";
+import { isAuthenticated, logout } from "../../utils/auth";
 import styles from "./Header.module.css";
 
 const Header: React.FC = () => {
   const location = useLocation();
+  // const [isLogin, setIslogin] = useState<Boolean>(false);
+
+  // useEffect(()=>{
+  //   setIslogin(isAuthenticated());
+  // },[]);
 
   return (
     <div className={styles.navbar}>
@@ -65,17 +70,18 @@ const Header: React.FC = () => {
         >
           Wishlist
         </Link>
-        <Link
-          to="/auth"
-          className={`${styles.navLink} ${
-            location.pathname === "/auth" ? styles.activeLink : ""
-          }`}
-        >
-          Auth
-        </Link>
-        <button onClick={logout} className={styles.logoutButton}>
-          Logout
-        </button>
+        {!!isAuthenticated() ? (
+          <button onClick={logout} className={styles.logoutButton}>
+            Logout
+          </button>
+        ) : (
+          <Link
+            to="/signin"
+            className={`${styles.navLink} ${
+              location.pathname === "/signin" ? styles.activeLink : ""
+            }`}
+          ></Link>
+        )}
       </nav>
     </div>
   );

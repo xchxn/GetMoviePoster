@@ -31,9 +31,9 @@ const AppRouter: React.FC = () => (
         <Route path="/signin" element={<Login />} />
         <Route path="/" element={<ProtectedRoute><Main /></ProtectedRoute>} />
         <Route path="/signup" element={<SignUp />} />
-        <Route path="/search" element={<Search/>} />
-        <Route path="/wishlist" element={<Wishlist/>} />
-        <Route path="/trending" element={<Trending/>} />
+        <Route path="/search" element={<ProtectedRoute><Search/></ProtectedRoute>} />
+        <Route path="/wishlist" element={<ProtectedRoute><Wishlist/></ProtectedRoute>} />
+        <Route path="/trending" element={<ProtectedRoute><Trending/></ProtectedRoute>} />
       </Routes>
     </AnimatePresence>
   </Router>

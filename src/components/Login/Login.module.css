@@ -1,0 +1,89 @@
+/* 로그인 컨테이너 */
+.logincontainer {
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto; /* 화면 중앙 배치 */
+  padding: 40px 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* 제목 */
+.logincontainer h2 {
+  text-align: center;
+  color: #333;
+  margin-bottom: 24px;
+}
+
+/* 에러 메시지 */
+.error {
+  color: #e74c3c;
+  font-size: 14px;
+  margin-bottom: 16px;
+  text-align: center;
+}
+
+/* 입력 필드 */
+.logincontainer input[type="text"],
+.logincontainer input[type="password"] {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 16px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 16px;
+  transition: border-color 0.3s ease;
+}
+
+.logincontainer input[type="text"]:focus,
+.logincontainer input[type="password"]:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+/* 체크박스 및 라벨 */
+.logincontainer label {
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  color: #555;
+  margin-bottom: 16px;
+}
+
+.logincontainer label input[type="checkbox"] {
+  margin-right: 8px;
+}
+
+/* 버튼 스타일 */
+.logincontainer button {
+  width: 100%;
+  padding: 12px;
+  font-size: 16px;
+  color: #fff;
+  background-color: #007bff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-bottom: 8px;
+}
+
+.logincontainer button:hover {
+  background-color: #0056b3;
+}
+
+.logincontainer button:last-of-type {
+  background-color: #6c757d;
+}
+
+.logincontainer button:last-of-type:hover {
+  background-color: #5a6268;
+}
+
+/* 반응형 */
+@media (max-width: 480px) {
+  .logincontainer {
+    padding: 30px 15px;
+  }
+}

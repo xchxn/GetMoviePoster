@@ -35,6 +35,9 @@ export const tryRegister = (
   if (!userExists) {
     users.push({ id: email, password: password });
     localStorage.setItem("users", JSON.stringify(users));
+
+    window.location.replace('/signin');
+    
     return { success: true, message: "User registered successfully" };
   } else {
     return { success: false, message: "User already exists" };
@@ -46,6 +49,8 @@ export const logout = () => {
     localStorage.removeItem('email');
     localStorage.removeItem('TMDb-Key'); // API 키 저장
     localStorage.removeItem('token');
+
+    window.location.reload();
     return { success: true, message: "Logout successfully" };
   } else {
     return { success: false, message: "User not logged in" };

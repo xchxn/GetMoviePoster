@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { tryRegister } from '../../utils/auth';
+import styles from './SignUp.module.css';
 
 const SignUp: React.FC = () => {
   const [email, setEmail] = useState('');
@@ -48,9 +49,9 @@ const SignUp: React.FC = () => {
   };
 
   return (
-    <div className="signup-container">
+    <div className={styles.signupcontainer}>
       <h2>회원가입</h2>
-      {error && <p className="error">{error}</p>}
+      {error && <p className={styles.error}>{error}</p>}
       <input
         type="text"
         placeholder="이메일"

@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import { tryLogin } from '../../utils/auth';
+import styles from './Login.module.css';
 
 const Login: React.FC = () => {
   const [email, setEmail] = useState('');
@@ -48,9 +49,9 @@ const Login: React.FC = () => {
   };
 
   return (
-    <div className="login-container">
+    <div className={styles.logincontainer}>
       <h2>로그인</h2>
-      {error && <p className="error">{error}</p>}
+      {error && <p className={styles.error}>{error}</p>}
       <input
         type="text"
         placeholder="이메일"
