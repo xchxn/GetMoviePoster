@@ -80,10 +80,52 @@
 .signupcontainer button:last-of-type:hover {
   background-color: #5a6268;
 }
+/* 반응형 스타일 */
 
-/* 반응형 */
+/* 태블릿 화면 (최대 너비 768px) */
+@media (max-width: 768px) {
+  .signupcontainer {
+    padding: 30px 15px; /* 여백 축소 */
+  }
+
+  .signupcontainer h2 {
+    font-size: 20px; /* 제목 폰트 크기 축소 */
+  }
+
+  .signupcontainer input[type="text"],
+  .signupcontainer input[type="password"] {
+    padding: 10px; /* 입력 필드 크기 축소 */
+    font-size: 14px; /* 입력 필드 폰트 크기 축소 */
+  }
+
+  .signupcontainer button {
+    padding: 10px; /* 버튼 크기 축소 */
+    font-size: 14px; /* 버튼 폰트 크기 축소 */
+  }
+}
+
+/* 모바일 화면 (최대 너비 480px) */
 @media (max-width: 480px) {
   .signupcontainer {
-    padding: 30px 15px;
+    padding: 20px 10px; /* 더 작은 여백 */
+  }
+
+  .signupcontainer h2 {
+    font-size: 18px; /* 제목 폰트 크기 더 축소 */
+  }
+
+  .signupcontainer input[type="text"],
+  .signupcontainer input[type="password"] {
+    padding: 8px; /* 입력 필드 크기 축소 */
+    font-size: 12px; /* 입력 필드 폰트 크기 축소 */
+  }
+
+  .signupcontainer button {
+    padding: 8px; /* 버튼 크기 더 축소 */
+    font-size: 12px; /* 버튼 폰트 크기 축소 */
+  }
+
+  .signupcontainer label {
+    font-size: 12px; /* 체크박스 라벨 폰트 크기 축소 */
   }
 }

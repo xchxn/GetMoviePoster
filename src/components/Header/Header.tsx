@@ -29,14 +29,17 @@ import styles from "./Header.module.css";
 
 const Header: React.FC = () => {
   const location = useLocation();
-  // const [isLogin, setIslogin] = useState<Boolean>(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false); // 메뉴 열림 상태 관리
 
-  // useEffect(()=>{
-  //   setIslogin(isAuthenticated());
-  // },[]);
+  const toggleMenu = () => {
+    setIsMenuOpen((prev) => !prev);
+  };
 
   return (
     <div className={styles.navbar}>
+      <button className={styles.menuButton} onClick={toggleMenu}>
+        ☰
+      </button>
       <nav className={styles.navLinks}>
         <Link
           to="/"

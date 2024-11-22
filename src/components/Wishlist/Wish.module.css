@@ -50,3 +50,58 @@
   color: #333;
   margin-top: 8px;
 }
+
+/* 반응형 스타일 */
+
+/* 태블릿 화면 (최대 너비 768px) */
+@media (max-width: 768px) {
+  .movieList {
+    gap: 12px; /* 카드 간 간격 축소 */
+    justify-content: center; /* 카드 가운데 정렬 */
+  }
+
+  .movieItem {
+    width: 150px; /* 카드 너비 축소 */
+  }
+
+  .movieTitle {
+    font-size: 16px; /* 제목 폰트 크기 축소 */
+  }
+
+  .movieDetails {
+    font-size: 13px; /* 상세 정보 폰트 크기 축소 */
+  }
+
+  .movieOverview {
+    font-size: 12px; /* 개요 폰트 크기 축소 */
+  }
+}
+
+/* 모바일 화면 (최대 너비 480px) */
+@media (max-width: 480px) {
+  .mainContainer {
+    padding: 10px; /* 모바일에서 패딩 축소 */
+  }
+
+  .movieList {
+    gap: 10px; /* 카드 간 간격 더 축소 */
+    justify-content: center;
+  }
+
+  .movieItem {
+    width: 100%; /* 카드 너비를 100%로 설정 */
+    max-width: 300px; /* 최대 너비 제한 */
+  }
+
+  .movieTitle {
+    font-size: 14px; /* 제목 폰트 크기 더 축소 */
+  }
+
+  .movieDetails {
+    font-size: 12px; /* 상세 정보 폰트 크기 더 축소 */
+  }
+
+  .movieOverview {
+    font-size: 11px; /* 개요 폰트 크기 더 축소 */
+  }
+}

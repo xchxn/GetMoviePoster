@@ -66,3 +66,60 @@
 .topButton:hover {
   background-color: #0056b3;
 }
+/* 반응형 스타일 */
+
+/* 태블릿 화면 (최대 너비 768px) */
+@media (max-width: 768px) {
+  .container {
+    padding: 15px; /* 패딩 축소 */
+  }
+
+  .movieGrid {
+    gap: 15px; /* 카드 간격 축소 */
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); /* 카드 크기 축소 */
+  }
+
+  .movieInfo {
+    font-size: 13px; /* 폰트 크기 축소 */
+  }
+
+  .pagination {
+    gap: 8px; /* 페이지네이션 간격 축소 */
+  }
+
+  .topButton {
+    padding: 8px 16px; /* 버튼 크기 축소 */
+    font-size: 14px; /* 버튼 폰트 크기 축소 */
+  }
+}
+
+/* 모바일 화면 (최대 너비 480px) */
+@media (max-width: 480px) {
+  .container {
+    padding: 10px; /* 패딩 더 축소 */
+  }
+
+  .movieGrid {
+    gap: 10px; /* 카드 간격 더 축소 */
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); /* 작은 카드 크기 */
+  }
+
+  .movieInfo {
+    font-size: 12px; /* 폰트 크기 더 축소 */
+  }
+
+  .viewToggle {
+    flex-direction: column; /* 토글 버튼 세로 배치 */
+    gap: 8px; /* 간격 조정 */
+  }
+
+  .pagination {
+    flex-direction: column; /* 페이지네이션 세로 배치 */
+    gap: 5px; /* 간격 조정 */
+  }
+
+  .topButton {
+    padding: 6px 12px; /* 버튼 크기 더 축소 */
+    font-size: 12px; /* 버튼 폰트 크기 축소 */
+  }
+}

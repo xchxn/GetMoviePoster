@@ -1,12 +1,11 @@
-/* Navbar 전체 스타일 */
+/* Navbar 스타일 */
 .navbar {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: #333; /* 네비게이션 배경색 */
+  background-color: #333;
   color: #fff;
   padding: 10px 20px;
-  margin: 6px 9px;
   position: fixed;
   width: 100%;
   top: 0;
@@ -15,7 +14,11 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-/* 로고 및 링크 스타일 */
+.logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
 .navLinks {
   display: flex;
   gap: 20px;
@@ -29,15 +32,14 @@
 }
 
 .navLink:hover {
-  color: #fff; /* 호버 시 텍스트 색상 */
+  color: #fff;
 }
 
 .activeLink {
-  color: #4CAF50; /* 활성화된 링크 색상 */
+  color: #4caf50;
   font-weight: bold;
 }
 
-/* 로그아웃 버튼 스타일 */
 .logoutButton {
   padding: 8px 16px;
   color: #fff;
@@ -49,23 +51,55 @@
 }
 
 .logoutButton:hover {
-  background-color: #c0392b; /* 호버 시 색상 변경 */
+  background-color: #c0392b;
 }
 
-/* 모바일 반응형 */
+/* 햄버거 메뉴 버튼 */
+.menuButton {
+  display: none;
+  font-size: 24px;
+  background: none;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+
+/* 반응형 스타일 */
+
+/* 태블릿 화면 */
 @media (max-width: 768px) {
-  .navbar {
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 15px;
+  .menuButton {
+    display: block; /* 햄버거 버튼 표시 */
   }
 
   .navLinks {
+    display: none; /* 기본적으로 네비게이션 링크 숨김 */
     flex-direction: column;
+    position: absolute;
+    top: 60px;
+    left: 0;
+    width: 100%;
+    background-color: #333;
+    padding: 10px 20px;
     gap: 10px;
   }
 
+  .navLinksOpen {
+    display: flex; /* 햄버거 버튼 클릭 시 표시 */
+  }
+}
+
+/* 모바일 화면 */
+@media (max-width: 480px) {
+  .navbar {
+    padding: 10px 15px;
+  }
+
+  .navLink {
+    font-size: 14px; /* 링크 폰트 크기 축소 */
+  }
+
   .logoutButton {
-    align-self: flex-end;
+    font-size: 14px; /* 로그아웃 버튼 폰트 크기 축소 */
   }
 }

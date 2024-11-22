@@ -50,3 +50,52 @@
   color: #333;
   margin-top: 8px;
 }
+
+/* 반응형 스타일 */
+@media (max-width: 768px) {
+  .movieItem {
+    width: 150px; /* 작은 화면에서 아이템 크기 축소 */
+  }
+
+  .movieTitle {
+    font-size: 16px; /* 제목 폰트 크기 축소 */
+  }
+
+  .movieDetails {
+    font-size: 12px; /* 상세 정보 폰트 크기 축소 */
+  }
+
+  .movieOverview {
+    font-size: 12px; /* 개요 폰트 크기 축소 */
+  }
+}
+
+@media (max-width: 480px) {
+  .mainContainer {
+    padding: 10px; /* 모바일에서 여백 줄임 */
+  }
+
+  .sectionTitle {
+    font-size: 20px; /* 섹션 제목 크기 축소 */
+  }
+
+  .movieList {
+    gap: 12px; /* 간격 줄임 */
+  }
+
+  .movieItem {
+    width: 100%; /* 모바일 화면에서 너비 100%로 설정 */
+  }
+
+  .movieTitle {
+    font-size: 14px; /* 제목 폰트 크기 축소 */
+  }
+
+  .movieDetails {
+    font-size: 12px; /* 상세 정보 폰트 크기 유지 */
+  }
+
+  .movieOverview {
+    font-size: 11px; /* 개요 폰트 크기 축소 */
+  }
+}
