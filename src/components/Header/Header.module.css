@@ -12,6 +12,8 @@
   left: 0;
   z-index: 1000;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  /* position: relative; */
+  padding: 1rem;
 }
 
 .logo {
@@ -101,5 +103,49 @@
 
   .logoutButton {
     font-size: 14px; /* 로그아웃 버튼 폰트 크기 축소 */
+  }
+}
+
+.menuButton {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.navLinks {
+  display: flex;
+  gap: 1rem;
+}
+
+@media (max-width: 768px) {
+  .menuButton {
+    display: block;
+    z-index: 100;
+  }
+
+  .navLinks {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.9);
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease-in-out;
+  }
+
+  .showMenu {
+    transform: translateX(0);
+  }
+
+  .navLink {
+    color: white;
+    font-size: 1.2rem;
+    padding: 1rem;
   }
 }
