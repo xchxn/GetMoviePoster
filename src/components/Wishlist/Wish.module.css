@@ -67,6 +67,12 @@
     justify-content: center; /* 카드 가운데 정렬 */
   }
 
+  .movieGrid {
+    gap: 15px; /* 카드 간격 축소 */
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); /* 카드 크기 축소 */
+  }
+
+
   .movieItem {
     width: 150px; /* 카드 너비 축소 */
   }
@@ -93,6 +99,11 @@
   .movieList {
     gap: 10px; /* 카드 간 간격 더 축소 */
     justify-content: center;
+  }
+
+  .movieGrid {
+    gap: 10px; /* 카드 간격 더 축소 */
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); /* 작은 카드 크기 */
   }
 
   .movieItem {

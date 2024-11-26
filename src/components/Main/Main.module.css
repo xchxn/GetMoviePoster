@@ -60,6 +60,12 @@
 
 /* 반응형 스타일 */
 @media (max-width: 768px) {
+
+  .movieGrid {
+    gap: 15px; /* 카드 간격 축소 */
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); /* 카드 크기 축소 */
+  }
+
   .movieItem {
     width: 150px; /* 작은 화면에서 아이템 크기 축소 */
   }
@@ -88,6 +94,11 @@
 
   .movieList {
     gap: 12px; /* 간격 줄임 */
+  }
+
+  .movieGrid {
+    gap: 10px; /* 카드 간격 더 축소 */
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); /* 작은 카드 크기 */
   }
 
   .movieItem {
