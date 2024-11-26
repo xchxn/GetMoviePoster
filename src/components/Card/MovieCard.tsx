@@ -11,6 +11,7 @@ interface MovieProps {
   vote_average: number;
   release_date: string;
   genre_ids: number[];
+  adult: boolean;
 }
 
 const MovieCard: React.FC<{ 
@@ -20,8 +21,12 @@ const MovieCard: React.FC<{
     isInWishlist: (movieId: number) => boolean;
   }> = ({ movie, onSaveMovie, onRemoveMovie, isInWishlist }) => {
   return (
-    <div className={styles.movieCard}>
-      <img src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`} alt={movie.title} />
+    <div key={movie.id} className={styles.movieCard}>
+      <img 
+        src={`${process.env.REACT_APP_MOVIE_IMAGE_BASE_URL}/w200${movie.poster_path}`} 
+        alt={movie.title}
+        className={styles.moviePoster}
+      />
       <div className={styles.movieInfo}>
         <h3>{movie.title}</h3>
         <p>Rating: {movie.vote_average}</p>

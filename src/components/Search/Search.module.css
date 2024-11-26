@@ -10,6 +10,12 @@
   margin: 20px 0 10px;
 }
 
+.movieGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 20px;
+}
+
 .movieList {
   display: flex;
   flex-wrap: wrap;

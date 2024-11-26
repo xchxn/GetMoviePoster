@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styles from "./Wish.module.css";
+import MovieCard from '../Card/MovieCard';
 
 interface Movie {
   id: number;
@@ -9,6 +10,7 @@ interface Movie {
   vote_average: number;
   release_date: string;
   genre_ids: number[];
+  adult: boolean;
 }
 
 
@@ -71,37 +73,15 @@ const MovieList: React.FC<{
   onRemoveMovie?: (movieId: number) => void;
   isInWishlist: (movieId: number) => boolean;
 }> = ({ movies, onSaveMovie, onRemoveMovie, isInWishlist }) => (
-  <div className={styles.movieList}>
+  <div className={styles.movieGrid}>
     {movies.map((movie) => (
-      <div key={movie.id} className={styles.movieItem}>
-        <img
-          src={`${process.env.REACT_APP_MOVIE_IMAGE_BASE_URL}/w200${movie.poster_path}`}
-          alt={movie.title}
-          className={styles.moviePoster}
-        />
-        <h3 className={styles.movieTitle}>{movie.title}</h3>
-        <div className={styles.movieDetails}>
-          <p>평점: {movie.vote_average}</p>
-          <p>개봉일: {movie.release_date}</p>
-          <p>{movie.overview}</p>
-          {isInWishlist(movie.id) ? (
-            <button
-              className={styles.removeButton}
-              onClick={() => onRemoveMovie?.(movie.id)}
-            >
-              💔
-            </button>
-          ) : (
-            <button 
-              className={styles.saveButton}
-              onClick={() => onSaveMovie?.(movie)}
-            >
-              ❤
-            </button>
-          )}
-        </div>
-      </div>
-    ))}
+          <MovieCard
+           key={movie.id} 
+           movie={movie} 
+           onSaveMovie={onSaveMovie}
+           onRemoveMovie={onRemoveMovie}
+           isInWishlist={isInWishlist}/>
+        ))}
   </div>
 );
 

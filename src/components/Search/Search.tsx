@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo, useState } from "react";
 import axios from "axios";
 import styles from "./Search.module.css";
+import MovieCard from '../Card/MovieCard';
 
 interface Movie {
   id: number;
@@ -213,37 +214,15 @@ const MovieList: React.FC<{
   });
 
   return (
-    <div className={styles.movieList}>
-      {filteredMovies.map((movie) => (
-        <div key={movie.id} className={styles.movieItem}>
-          <img
-            src={`${process.env.REACT_APP_MOVIE_IMAGE_BASE_URL}/w200${movie.poster_path}`}
-            alt={movie.title}
-            className={styles.moviePoster}
-          />
-          <h3 className={styles.movieTitle}>{movie.title}</h3>
-          <div className={styles.movieDetails}>
-            <p>평점: {movie.vote_average}</p>
-            <p>개봉일: {movie.release_date}</p>
-            <p>{movie.overview}</p>
-            {isInWishlist(movie.id) ? (
-              <button
-                className={styles.removeButton}
-                onClick={() => onRemoveMovie?.(movie.id)}
-              >
-                💔
-              </button>
-            ) : (
-              <button
-                className={styles.saveButton}
-                onClick={() => onSaveMovie?.(movie)}
-              >
-                ❤
-              </button>
-            )}
-          </div>
-        </div>
-      ))}
+    <div className={styles.movieGrid}>
+       {filteredMovies.map((movie) => (
+          <MovieCard
+           key={movie.id} 
+           movie={movie} 
+           onSaveMovie={onSaveMovie}
+           onRemoveMovie={onRemoveMovie}
+           isInWishlist={isInWishlist}/>
+        ))}
     </div>
   );
 };

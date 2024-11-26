@@ -35,12 +35,23 @@
   gap: 20px;
 }
 
+.moviePoster {
+  width: 100%;
+  height: auto;
+  transition: transform 0.3s ease, box-shadow 0.3s
+}
+
 .movieCard {
   position: relative;
   border: 1px solid #ddd;
   border-radius: 8px;
   overflow: hidden;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.movieCard:hover {
+  transform: scale(1.03);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 }
 
 .movieCard img {
@@ -52,6 +63,11 @@
   padding: 10px;
   font-size: 14px;
   color: #333;
+  opacity: 0.9;
+  transition: opacity 0.3s ease;
+}
+.movieCard:hover .movieInfo {
+  opacity: 1;
 }
 
 .pagination {

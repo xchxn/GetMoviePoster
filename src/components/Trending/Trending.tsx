@@ -13,6 +13,7 @@ interface Movie {
   vote_average: number;
   release_date: string;
   genre_ids: number[];
+  adult: boolean;
 }
 
 const API_KEY = process.env.REACT_APP_MOVIE_API_KEY;
