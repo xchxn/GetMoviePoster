@@ -1,48 +1,59 @@
-# Getting Started with Create React App
-
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
-## Available Scripts
-
-In the project directory, you can run:
-
-### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
 # GetMoviePoster
 TMDB API를 활용하여 영화 포스터를 모아볼 수 있는 웹 앱 구현
+
+## 프로젝트 소개
+이 프로젝트는 TMDB(The Movie Database) API를 활용하여 다양한 영화의 포스터를 검색하고 모아볼 수 있는 웹 애플리케이션입니다.
+
+## 주요 기능
+- 영화 제목 검색 기능
+- 인기 영화 포스터 표시
+- 최신 개봉 영화 포스터 표시
+- 포스터 클릭 시 영화 상세 정보 확인
+- 좋아하는 영화 포스터 저장 기능
+
+## 기술 스택
+- Frontend: React.js
+- API: TMDB API
+- 스타일링: CSS/SCSS
+- 상태관리: React Context API
+
+## 설치 및 실행 방법
+1. 저장소 클론
+```bash
+git clone https://github.com/xchxn/GetMoviePoster.git
+```
+
+
+2. 의존성 패키지 설치
+```bash
+cd GetMoviePoster
+npm install
+```
+
+4. 환경 변수 설정
+- `.env` 파일을 생성하고 TMDB API 키 설정
+- REACT_APP_TMDB_API_KEY=your_api_key
+
+5. 프로젝트 실행
+```bash
+npm start
+```
+
+## API 키 발급 방법
+1. [TMDB 웹사이트](https://www.themoviedb.org)에 가입
+2. 설정에서 API 섹션 확인
+3. API 키 발급 받기
+
+## 기여 방법
+1. 이 저장소를 포크합니다.
+2. 새로운 브랜치를 생성합니다.
+3. 변경사항을 커밋합니다.
+4. 브랜치에 푸시합니다.
+5. Pull Request를 생성합니다.
+
+## 라이선스
+이 프로젝트는 MIT 라이선스를 따릅니다.
+
+## 연락처
+- 이메일: seokregi@gmail.com
+- GitHub: [your-username](https://github.com/xchxn)
