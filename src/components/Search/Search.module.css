@@ -1,6 +1,7 @@
 /* src/components/Main.module.css */
 .mainContainer {
   padding: 20px;
+  margin-top: 36px;
 }
 
 .sectionTitle {
@@ -69,6 +70,57 @@
   font-weight: bold;
   color: #333;
   margin-right: 12px;
+  position: relative;
+  padding-left: 35px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.filterTitle input[type="checkbox"] {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 20px;
+  width: 20px;
+  background-color: #eee;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+.filterTitle:hover input ~ .checkmark {
+  background-color: #ccc;
+}
+
+.filterTitle input:checked ~ .checkmark {
+  background-color: #2196F3;
+}
+
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+.filterTitle input:checked ~ .checkmark:after {
+  display: block;
+}
+
+.filterTitle .checkmark:after {
+  left: 7px;
+  top: 3px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
 }
 
 /* 필터 버튼 기본 스타일 */
@@ -114,6 +166,51 @@
 .filterSlider {
   width: 150px;
 }
+
+/* 검색 입력창 스타일 */
+.searchInput {
+  padding: 10px 15px;
+  border: 2px solid #e0e0e0;
+  border-radius: 6px;
+  font-size: 16px;
+  width: 100%;
+  max-width: 300px;
+  transition: border-color 0.3s ease;
+}
+
+.searchInput:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
+}
+
+/* 셀렉트 박스 스타일 */
+.selectBox {
+  padding: 8px 12px;
+  margin-left: 10px;
+  border: 2px solid #e0e0e0;
+  border-radius: 6px;
+  font-size: 16px;
+  background-color: white;
+  cursor: pointer;
+  min-width: 150px;
+}
+
+.selectBox:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
+}
+
+/* 라벨 스타일 */
+.searchLabel {
+  font-size: 16px;
+  font-weight: 500;
+  color: #333;
+  margin-bottom: 8px;
+  display: block;
+}
+
 
 /* 반응형 - 화면이 좁아질 때 필터 옵션이 수직으로 배치되도록 */
 

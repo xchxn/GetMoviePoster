@@ -116,11 +116,10 @@ const Trending: React.FC = () => {
         <button onClick={() => setView('table')}>Table View</button>
         <button onClick={() => setView('infinite')}>Infinite Scroll View</button>
       </div>
-
       {view === 'table' ? (
         <>
           <div className={styles.movieGrid}>
-            {movies.map((movie) => (
+            {currentMovies.map((movie) => (
               <MovieCard key={movie.id} movie={movie} onSaveMovie={handleSaveMovie} onRemoveMovie={handleRemoveMovie} isInWishlist={isInWishlist}/>
             ))}
           </div>

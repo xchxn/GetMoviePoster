@@ -58,7 +58,7 @@ const Wishlist = () => {
   return (
     <div>
       <div className={styles.mainContainer}>
-      <h2 className={styles.sectionTitle}>현재 상영작</h2>
+      <h2 className={styles.sectionTitle}>WishList</h2>
       <MovieList movies={wishlist} onSaveMovie={handleSaveMovie} onRemoveMovie={handleRemoveMovie}  isInWishlist={isInWishlist}/>
     </div>
     </div>

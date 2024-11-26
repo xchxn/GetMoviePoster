@@ -117,21 +117,24 @@ const Search = () => {
       <div className={styles.filterContainer}>
         <h3 className={styles.filterTitle}>필터 옵션</h3>
         <label className={styles.filterTitle}>
+          성인 포함
           <input
             type="checkbox"
             checked={adult}
             onChange={() => setAdult(!adult)}
+            className={styles.checkbox}
           />
-          성인 포함
+          <span className={styles.checkmark}></span>
         </label>
         <label className={styles.filterTitle}>
           장르:
           <select
+            className={styles.selectBox}
             value={genre ?? ""}
             onChange={(e) =>
               setGenre(e.target.value ? Number(e.target.value) : null)
             }
-            className={styles.filterDropdown}
+            // className={styles.filterDropdown}
           >
             <option value="">전체</option>
             <option value="28">액션</option>
@@ -146,7 +149,9 @@ const Search = () => {
             type="date"
             value={releaseDate}
             onChange={(e) => setReleaseDate(e.target.value)}
-            className={styles.filterDropdown}
+            // className={styles.filterDropdown}
+            className={styles.selectBox}
+
           />
         </label>
         <label className={styles.filterTitle}>
@@ -160,7 +165,8 @@ const Search = () => {
             onChange={(e) =>
               setVoteAverage(e.target.value ? Number(e.target.value) : null)
             }
-            className={styles.filterDropdown}
+            // className={styles.filterDropdown}
+            className={styles.selectBox}
           />
         </label>
         <button className={styles.filterButton} onClick={resetFilters}>

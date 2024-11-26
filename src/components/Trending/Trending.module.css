@@ -8,8 +8,25 @@
 .viewToggle {
   display: flex;
   gap: 10px;
-  margin-top: 24px;
+  margin-top: 36px;
   margin-bottom: 20px;
+  justify-content: flex-end;
+
+  button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    padding: 10px 20px;
+  }
+
+  button:hover {
+    background-color: #0056b3;
+    color: #fff;
+    transform: scale(1.05);
+  }
 }
 
 .movieGrid {
@@ -43,6 +60,37 @@
   align-items: center;
   gap: 10px;
   margin-top: 20px;
+}
+
+.paginationButton {
+  padding: 8px 16px;
+  border: 1px solid #ddd;
+  background-color: white;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.paginationButton:hover:not(:disabled) {
+  background-color: #f0f0f0;
+  border-color: #999;
+}
+
+.paginationButton:disabled {
+  background-color: #f5f5f5;
+  color: #999;
+  cursor: not-allowed;
+}
+
+.activePage {
+  background-color: #007bff;
+  color: white;
+  border-color: #007bff;
+}
+
+.activePage:hover {
+  background-color: #0056b3 !important;
+  border-color: #0056b3 !important;
 }
 
 .loading {

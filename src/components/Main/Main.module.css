@@ -1,6 +1,7 @@
 /* src/components/Main.module.css */
 .mainContainer {
   padding: 20px;
+  margin-top: 36px;
 }
 
 .sectionTitle {
