@@ -95,6 +95,7 @@
 
   .logincontainer input[type="text"],
   .logincontainer input[type="password"] {
+    width: calc(100% - 20px);
     font-size: 14px; /* 입력 필드 폰트 크기 축소 */
     padding: 10px; /* 입력 필드 높이 축소 */
   }
@@ -117,6 +118,7 @@
 
   .logincontainer input[type="text"],
   .logincontainer input[type="password"] {
+    width: calc(100% - 16px);
     font-size: 12px; /* 입력 필드 폰트 크기 축소 */
     padding: 8px; /* 입력 필드 높이 더 축소 */
   }
