@@ -8,18 +8,6 @@ interface PaginationProps {
   totalPages: number;
 }
 
-// const Pagination: React.FC<PaginationProps> = ({ currentPage, onPageChange }) => {
-//   return (
-//     <div className={styles.pagination}>
-//       <button onClick={() => onPageChange(currentPage - 1)} disabled={currentPage === 1}>
-//         Previous
-//       </button>
-//       <span>Page {currentPage}</span>
-//       <button onClick={() => onPageChange(currentPage + 1)}>Next</button>
-//     </div>
-//   );
-// };
-
 const Pagination: React.FC<PaginationProps> = ({ currentPage, onPageChange, totalPages }) => {
   const pageNumbers = [];
 
