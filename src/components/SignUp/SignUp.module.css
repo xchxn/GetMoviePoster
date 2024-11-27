@@ -4,6 +4,7 @@
   max-width: 400px;
   margin: 0 auto; /* 중앙 배치 */
   padding: 40px 20px;
+  margin-top: 36px;
   background-color: #fff;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -85,7 +86,10 @@
 /* 태블릿 화면 (최대 너비 768px) */
 @media (max-width: 768px) {
   .signupcontainer {
-    padding: 30px 15px; /* 여백 축소 */
+    .signupcontainer {
+      max-width: 320px; /* 컨테이너 최대 너비 축소 */
+      padding: 25px 15px;
+    }
   }
 
   .signupcontainer h2 {
@@ -107,7 +111,8 @@
 /* 모바일 화면 (최대 너비 480px) */
 @media (max-width: 480px) {
   .signupcontainer {
-    padding: 20px 10px; /* 더 작은 여백 */
+    max-width: 280px; /* 컨테이너 최대 너비 더 축소 */
+    padding: 20px 10px;
   }
 
   .signupcontainer h2 {
