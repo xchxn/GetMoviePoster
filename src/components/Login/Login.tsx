@@ -5,6 +5,7 @@ import axios from 'axios';
 import { toast } from 'react-toastify';
 import { tryLogin } from '../../utils/auth';
 import styles from './Login.module.css';
+import { kakaoLogin } from '../../utils/social-auth';
 
 const Login: React.FC = () => {
   const [email, setEmail] = useState('');
@@ -74,6 +75,7 @@ const Login: React.FC = () => {
       </label>
       <button onClick={handleLogin}>로그인</button>
       <button onClick={() => navigate('/signup')}>회원가입</button>
+      <button onClick={kakaoLogin}>카카오 로그인</button>
     </div>
   );
 };

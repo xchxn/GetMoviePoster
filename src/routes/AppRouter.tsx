@@ -15,6 +15,7 @@ import Header from '../components/Header/Header';
 import Wishlist from '../components/Wishlist/Wishlist';
 import Trending from '../components/Trending/Trending';
 import Search from '../components/Search/Search';
+import { kakaoLoginCallback } from '../utils/social-auth';
 
 const ProtectedRoute: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   if (!isAuthenticated()) {
@@ -34,6 +35,7 @@ const AppRouter: React.FC = () => (
         <Route path="/search" element={<ProtectedRoute><Search/></ProtectedRoute>} />
         <Route path="/wishlist" element={<ProtectedRoute><Wishlist/></ProtectedRoute>} />
         <Route path="/trending" element={<ProtectedRoute><Trending/></ProtectedRoute>} />
+        <Route path="/oauth/callback/kakao" element={<div>{kakaoLoginCallback()}</div>} />
       </Routes>
     </AnimatePresence>
   </Router>
