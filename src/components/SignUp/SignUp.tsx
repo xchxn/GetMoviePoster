@@ -20,31 +20,51 @@ const SignUp: React.FC = () => {
   };
 
   const handleSignUp = async () => {
-    setError('');
-
-    // 입력 검증
-    if (!validateEmail(email)) {
-      setError('유효한 이메일 형식이 아닙니다.');
-      return;
-    }
-    if (password !== confirmPassword) {
-      setError('비밀번호가 일치하지 않습니다.');
-      return;
-    }
-    if (!agreeTerms) {
-      setError('약관에 동의하셔야 합니다.');
-      return;
-    }
-
     try {
-      // utils의 auth.ts 호출
-      tryRegister(email, password);
-
-      // 회원가입 성공 시 처리
-      toast.success('회원가입 성공!');
+      setError(''); // 이전 에러 메시지 초기화
+  
+      // 입력값 공백 체크
+      if (!email.trim() || !password.trim() || !confirmPassword.trim()) {
+        setError('모든 필드를 입력해주세요.');
+        return;
+      }
+  
+      // 이메일 형식 검증
+      if (!validateEmail(email)) {
+        setError('유효한 이메일 형식이 아닙니다.');
+        return;
+      }
+  
+      // 비밀번호 일치 여부 확인
+      if (password !== confirmPassword) {
+        setError('비밀번호가 일치하지 않습니다.');
+        return;
+      }
+  
+      // 약관 동의 확인
+      if (!agreeTerms) {
+        setError('약관에 동의해주세요.');
+        return;
+      }
+  
+      // 회원가입 처리
+      const result = await tryRegister(email, password);
+      
+      if (!result.success) {
+        setError(result.message);
+        return;
+      }
+  
+      toast.success(result.message);
       navigate('/signin');
+  
     } catch (error) {
-      setError('회원가입에 실패했습니다. 다시 시도해 주세요.');
+      console.error('회원가입 오류:', error);
+      if (error instanceof Error) {
+        setError(error.message);
+      } else {
+        setError('회원가입 처리 중 오류가 발생했습니다.');
+      }
     }
   };
 

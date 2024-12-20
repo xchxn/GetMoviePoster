@@ -2,10 +2,12 @@ import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { isAuthenticated, logout } from "../../utils/auth";
 import styles from "./Header.module.css";
+import { getKaKaoUserProfile } from "../../utils/social-auth";
 
 const Header: React.FC = () => {
   const location = useLocation();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [username, setUsername] = useState<string | null>(null);
 
   // 모바일 메뉴가 열려있을 때 스크롤 방지
   useEffect(() => {
@@ -14,7 +16,17 @@ const Header: React.FC = () => {
     } else {
       document.body.style.overflow = 'unset';
     }
+    
   }, [isMenuOpen]);
+
+  // 인증 상태가 변경될 때만 username 업데이트
+  useEffect(() => {
+    if (isAuthenticated()) {
+      setUsername(localStorage.getItem('username'));
+    } else {
+      setUsername(null);
+    }
+  }, [isAuthenticated()]);
 
   const toggleMenu = () => {
     setIsMenuOpen((prev) => !prev);
@@ -75,6 +87,9 @@ const Header: React.FC = () => {
           ></Link>
         )}
       </nav>
+      <div>
+          {username}
+        </div>
     </div>
   );
 };

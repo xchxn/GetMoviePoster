@@ -5,6 +5,12 @@ export interface SearchOptions {
   sorting: string;
 }
 
+export interface User {
+  id: string;
+  password: string;
+  apiKey?: string;
+}
+
 export interface Movie {
   id: number;
   title: string;
@@ -21,3 +27,10 @@ interface APIResponse {
   total_pages: number;
   total_results: number;
 }
+
+export type KakaoPropertyKeys = 
+  | "kakao_account.profile"
+  | "kakao_account.email"
+  | "kakao_account.age_range"
+  | "kakao_account.birthday"
+  | "kakao_account.gender";

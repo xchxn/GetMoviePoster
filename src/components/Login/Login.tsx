@@ -20,32 +20,63 @@ const Login: React.FC = () => {
   };
 
   const handleLogin = async () => {
-    if (!validateEmail(email)) {
-      setError('유효한 이메일 형식이 아닙니다.');
-      return;
-    }
-
     try {
-      const response = await axios.get(`${process.env.REACT_APP_MOVIE_API_URL}/authentication/token/new`,{
-      headers: {
-        Authorization: `Bearer ${process.env.REACT_APP_MOVIE_ACCESS_TOKEN}`,
-        accept: 'application/json'
-        }
-      });
-
-      console.log(response);
-      
-      const token = response.data.request_token;
-      if (token) {
-        tryLogin(email, password, token, rememberMe);
-
-        toast.success('로그인 성공!');
-        navigate('/');
-      } else {
-        throw new Error('인증 실패');
+      setError(''); // 이전 에러 메시지 초기화
+  
+      if (!email.trim() || !password.trim()) {
+        setError('이메일과 비밀번호를 모두 입력해주세요.');
+        return;
       }
+  
+      if (!validateEmail(email)) {
+        setError('유효한 이메일 형식이 아닙니다.');
+        return;
+      }
+  
+      const response = await axios.get(
+        `${process.env.REACT_APP_MOVIE_API_URL}/authentication/token/new`,
+        {
+          headers: {
+            Authorization: `Bearer ${process.env.REACT_APP_MOVIE_ACCESS_TOKEN}`,
+            accept: 'application/json'
+          }
+        }
+      );
+  
+      const token = response.data.request_token;
+      if (!token) {
+        throw new Error('인증 토큰을 받아오지 못했습니다.');
+      }
+  
+      const loginResult = await tryLogin(email, password, token, rememberMe);
+      
+      if (!loginResult.success) {
+        setError(loginResult.message);
+        return;
+      }
+  
+      toast.success(loginResult.message);
+      navigate('/');
+  
     } catch (error) {
-      setError('로그인에 실패했습니다.');
+      console.error('로그인 오류:', error);
+      if (error instanceof Error) {
+        setError(error.message);
+      } else {
+        setError('로그인 처리 중 오류가 발생했습니다.');
+      }
+    }
+  };
+
+  const handleKakaoLogin = async () => {
+    try {
+      await kakaoLogin();
+
+      toast.success('로그인 성공!');
+
+      navigate('/search');
+    } catch (error) {
+      setError('카카오 로그인에 실패했습니다.');
     }
   };
 
@@ -75,7 +106,7 @@ const Login: React.FC = () => {
       </label>
       <button onClick={handleLogin}>로그인</button>
       <button onClick={() => navigate('/signup')}>회원가입</button>
-      <button onClick={kakaoLogin}>카카오 로그인</button>
+      <button onClick={handleKakaoLogin}>카카오 로그인</button>
     </div>
   );
 };
