@@ -74,7 +74,7 @@ const Login: React.FC = () => {
 
       toast.success('로그인 성공!');
 
-      navigate('/search');
+      navigate('/');
     } catch (error) {
       setError('카카오 로그인에 실패했습니다.');
     }
