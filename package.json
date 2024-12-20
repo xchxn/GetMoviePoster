@@ -29,7 +29,11 @@
     "eject": "react-scripts eject",
     "start:dev": "env-cmd -f .env.dev react-scripts start",
     "build:dev": "env-cmd -f .env.dev react-scripts build",
-    "build:prod": "env-cmd -f .env.prod react-scripts build"
+    "build:prod": "env-cmd -f .env.production react-scripts build",
+    "start:pm2": "pm2 start ecosystem.config.js --env production",
+    "stop:pm2": "pm2 stop movie-poster-app",
+    "restart:pm2": "pm2 restart movie-poster-app",
+    "delete:pm2": "pm2 delete movie-poster-app"
   },
   "eslintConfig": {
     "extends": [
